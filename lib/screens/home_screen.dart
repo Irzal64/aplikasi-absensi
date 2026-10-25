@@ -86,9 +86,14 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
             icon: const Icon(Icons.calendar_month),
             onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const RekapScreen())),
-          )
+          ),
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const SettingsScreen())),
+          ),
         ],
       ),
+
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
