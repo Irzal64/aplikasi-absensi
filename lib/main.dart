@@ -6,6 +6,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   await Hive.openBox('absenBox');
+  await Hive.openBox('settingBox');
   runApp(const MyApp());
 }
 

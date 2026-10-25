@@ -1,44 +1,51 @@
 class AbsenModel {
-  final String tanggal;
+  final String tanggal; // key: yyyy-MM-dd
   final String masuk;
-  String pulang;
+  final String pulang;
   final String catatan;
-  final double lat;
-  final double lng;
-  final String fotoPath;
+  final double? latitude;
+  final double? longitude;
+  final String? fotoMasuk;
+  final String? fotoPulang;
 
   AbsenModel({
     required this.tanggal,
-    required this.masuk,
+    this.masuk = '-',
     this.pulang = '-',
-    required this.catatan,
-    required this.lat,
-    required this.lng,
-    required this.fotoPath,
+    this.catatan = '',
+    this.latitude,
+    this.longitude,
+    this.fotoMasuk,
+    this.fotoPulang,
   });
 
-  // Fungsi untuk mengubah data dari Map Hive menjadi Objek Dart
-  factory AbsenModel.fromMap(String tanggal, Map<dynamic, dynamic> map) {
-    return AbsenModel(
-      tanggal: tanggal,
-      masuk: map['masuk'] ?? '-',
-      pulang: map['pulang'] ?? '-',
-      catatan: map['catatan'] ?? '',
-      lat: (map['lat'] as num?)?.toDouble() ?? 0.0,
-      lng: (map['lng'] as num?)?.toDouble() ?? 0.0,
-      fotoPath: map['fotoPath'] ?? '',
-    );
+  factory AbsenModel.fromMap(String key, dynamic data) {
+    if (data is Map) {
+      return AbsenModel(
+        tanggal: data['tanggal'] ?? key,
+        masuk: data['masuk']?.toString() ?? '-',
+        pulang: data['pulang']?.toString() ?? '-',
+        catatan: data['catatan']?.toString() ?? '',
+        latitude: data['latitude'] != null ? double.tryParse(data['latitude'].toString()) : null,
+        longitude: data['longitude'] != null ? double.tryParse(data['longitude'].toString()) : null,
+        fotoMasuk: data['fotoMasuk']?.toString(),
+        fotoPulang: data['fotoPulang']?.toString(),
+      );
+    }
+    // untuk data lama yang cuma string
+    return AbsenModel(tanggal: key, masuk: data.toString());
   }
 
-  // Fungsi untuk mengubah Objek Dart menjadi Map agar bisa disimpan di Hive
   Map<String, dynamic> toMap() {
     return {
+      'tanggal': tanggal,
       'masuk': masuk,
       'pulang': pulang,
       'catatan': catatan,
-      'lat': lat,
-      'lng': lng,
-      'fotoPath': fotoPath,
+      'latitude': latitude,
+      'longitude': longitude,
+      'fotoMasuk': fotoMasuk,
+      'fotoPulang': fotoPulang,
     };
   }
 }
