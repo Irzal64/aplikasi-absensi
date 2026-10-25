@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:intl/date_symbol_data_local.dart'; // TAMBAHKAN INI
+import 'package:intl/date_symbol_data_local.dart'; // baris 1
 import 'screens/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
-  // INI YANG KURANG, TAMBAHKAN 2 BARIS INI
-  await initializeDateFormatting('id_ID', null); 
-  
-  await Hive.initFlutter();
-  await Hive.openBox('absenBox');
-  await Hive.openBox('settingBox'); // pastikan ada ini juga
-  
+  await initializeDateFormatting('id_ID', null); // baris 2
+  await Hive.initFlutter(); // baris 3
+  await Hive.openBox('absenBox'); // baris 4
+  await Hive.openBox('settingBox'); // baris 5
   runApp(const MyApp());
 }
 
