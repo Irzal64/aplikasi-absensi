@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import '../models/absen_model.dart';
 import 'camera_screen.dart';
 import 'rekap_screen.dart';
-import 'settings_screen.dart'
+import 'settings_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -93,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      
+
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
